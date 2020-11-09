@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+## Submission
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Fabbi React Assignment 1
 
-## Available Scripts
+<!-- toc -->
 
-In the project directory, you can run:
+-   [Fabbi React Assignment 1](#fabbi-react-assignment-1)
+    -   [Requirements](#requirements)
+        -   [Must](#must)
+        -   [Optional](#optional)
+    -   [Setup](#setup)
+    -   [Description](#description)
+        -   [Step 1](#step-1)
+        -   [Step 2](#step-2)
+        -   [Step 3](#step-3)
+        -   [Step 4](#step-4)
+    -   [Notes](#notes)
+    -   [Submission](#submission)
+    -   [FAQs](#faqs)
 
-### `npm start`
+<!-- tocstop -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Requirements
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Must
 
-### `npm test`
+-   Use `React`
+-   Use `ES6+`
+-   Use `hooks`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Optional
 
-### `npm run build`
+-   Use with [Ant Design](https://ant.design/) or [MaterialUI](https://material-ui.com/)
+-   Use a type system (preferred `typescript`)
+-   Write Unit Tests (any testing library, but preferred `jest`)
+-   Write Integration Tests
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+As this test is to evaluate basic `React` skills, we are not be focusing on tooling setup (webpack, babel, etc...).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+So feel free to use [create react app](https://github.com/facebookincubator/create-react-app) to jump-start your development, although if not comfortable custom setup is also welcomed.
 
-### `npm run eject`
+## Description
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We want to make multiple steps form. This form is aimed to help user pre-order food from restaurants, the data for restaurants and food items and is provided in the [data](./data) folder.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Wireframes for the form are provided in the [wire frames](./wireframes) folder.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![step 1](./wireframes/Step%201.png 'step 1')
 
-## Learn More
+### Step 1
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   Users select the Meal Category (breakfast, lunch, or dinner).
+-   They also need to input the number of people (maximum 10)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Both of these should be required fields.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![step 2](./wireframes/Step%202.png 'step 2')
 
-### Analyzing the Bundle Size
+### Step 2
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+-   Users select appropriate restaurants that provide meals based on a selection in the first step.
 
-### Making a Progressive Web App
+This is also a required field.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+![step 3](./wireframes/Step%203.png 'step 3')
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Step 3
 
-### Deployment
+-   User selects dishes they want to pre-order based on the meal and restaurant they selected in the first two steps.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+-   They first choose a dish
+-   They can also add a number of servings of the dish (defaulted to 1)
+-   Also users can't select the same dish twice, rather add more servings.
 
-### `npm run build` fails to minify
+The total number of dishes (i.e Number of dishes \* respective serving) should be greater or equal to the number of people selected in the first step and a maximum of 10 is allowed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+![step 4](./wireframes/Step%204.png 'step 4')
+
+### Step 4
+
+On the final step, users should be able to review all their previous choices
+and click submit.
+
+## Notes
+
+-   User can't proceed to the next step unless they have valid inputs on the current step.
+-   if their inputs are not valid, show appropriate validation errors.
+-   At any step users can go back and change their preference on any previous step.
+-   Finally when the user submits the form, just log the data on the console as we don't provide any back end for now.
+-   Finer details of UX is left for you to decide.
+
+## Submission
+
+-   Submit a working link of your code repository (GitHub)
+-   Submit a link of the deployed app (github.io/ now/ surge, etc...)
+
+## FAQs
+
+-   Library Usage
+    -   You are free to use any 3rd party library you want, although we might ask for justification.
