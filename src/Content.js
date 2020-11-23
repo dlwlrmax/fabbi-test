@@ -30,19 +30,7 @@ const steps = [
 ];
 export default function Content() {
     const [current, setCurrent] = useState(0);
-    const context = useContext(MyContext);
-    const dishes = context.dishes;
-    //get meal value
-    const [meal, setMeal] = useState('');
-    const onMealChange = value => {
-        setMeal(value);
-        resetRestaurant();
-    };
-    //get number of ppl
-    const [people, setPeople] = useState(1);
-    const onPeopleChange = value => {
-        setPeople(value);
-    };
+    const { dishes, restaurant, setRestaurant, meal, order, setOrder, availableDishes, setAvailableDishes, people } = useContext(MyContext);
 
     //filter restaurant by meal
     const [filterRestaurants, setFilterRestaurant] = useState([]);
@@ -52,31 +40,16 @@ export default function Content() {
     }, [meal, dishes]);
 
     //get restaurant name
-    const [restaurant, setRestaurant] = useState('');
     const onSelectRestaurant = value => {
         setRestaurant(value);
         resetDishes();
     };
 
-    //get available dishes
-    const [availableDishes, setAvailableDishes] = useState([]);
     useEffect(() => {
         const _availableDishes = filterRestaurants.filter(item => item.restaurant === restaurant);
         setAvailableDishes(_availableDishes);
-    }, [filterRestaurants, restaurant]);
-    //order
-    const [order, setOrder] = useState({
-        ppl: people,
-        meal: meal,
-        restaurant: restaurant,
-        dishes: [
-            {
-                name: '',
-                no: 1,
-                id: uuid(),
-            },
-        ],
-    });
+    }, [filterRestaurants, restaurant, setAvailableDishes]);
+
     //add item to order
     const addItem = () => {
         let _order = { ...order };
@@ -91,11 +64,8 @@ export default function Content() {
     const removeItem = id => {
         let _order = { ...order };
         let index = _order.dishes.findIndex(item => item.id === id);
-        console.log(_order.dishes[index].name);
         let _availableDishes = [...availableDishes];
-        console.log(_availableDishes);
         _availableDishes.push(_order.dishes[index]);
-        console.log(_availableDishes);
         setAvailableDishes(_availableDishes);
         _order.dishes.splice(index, 1);
         setOrder(_order);
@@ -166,33 +136,14 @@ export default function Content() {
     if (dishes) {
         switch (current) {
             case 0:
-                content = (
-                    <Step1
-                        meal={meal}
-                        onMealChange={onMealChange}
-                        onPeopleChange={onPeopleChange}
-                        people={people}
-                        disableDot={disableDot}
-                        next={next}
-                    />
-                );
+                content = <Step1 disableDot={disableDot} next={next} resetRestaurant={resetRestaurant} />;
                 break;
             case 1:
-                content = (
-                    <Step2
-                        meal={meal}
-                        restaurant={restaurant}
-                        filterRestaurants={filterRestaurants}
-                        onSelectRestaurant={onSelectRestaurant}
-                        next={next}
-                        prev={prev}
-                    />
-                );
+                content = <Step2 filterRestaurants={filterRestaurants} onSelectRestaurant={onSelectRestaurant} next={next} prev={prev} />;
                 break;
             case 2:
                 content = (
                     <Step3
-                        restaurant={restaurant}
                         availableDishes={availableDishes}
                         disableDot={disableDot}
                         addItem={addItem}
@@ -202,7 +153,6 @@ export default function Content() {
                         saveDishNumber={saveDishNumber}
                         next={next}
                         prev={prev}
-                        people={people}
                     />
                 );
                 break;

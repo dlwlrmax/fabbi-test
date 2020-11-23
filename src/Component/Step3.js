@@ -1,13 +1,15 @@
 import { Button, Col, Row, Space } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Typography } from 'antd';
 import { LeftOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons';
 import Item from './Item/Item';
+import { MyContext } from '../MyContext';
 const { Title } = Typography;
 
-export default function Step3({ people, next, prev, order, addItem, availableDishes, disableDot, removeItem, saveDishName, saveDishNumber }) {
+export default function Step3({ next, prev, order, addItem, availableDishes, disableDot, removeItem, saveDishName, saveDishNumber }) {
     const [isValidate, setValidate] = useState(false);
     const [totalDishes, setTotalDishes] = useState(0);
+    const { people } = useContext(MyContext);
     useEffect(() => {
         let _total = order.dishes.reduce((sum, item) => sum + item.no, 0);
         setTotalDishes(_total);

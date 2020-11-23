@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { InputNumber, Select, Form, Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
-
+import { MyContext } from '../MyContext';
 const { Option } = Select;
 function validatePrimeNumber(number) {
     if (number > 0 && number <= 10) {
@@ -17,10 +17,17 @@ function validatePrimeNumber(number) {
     };
 }
 
-export default function Step1({ next, meal, people, onMealChange, onPeopleChange, disableDot }) {
+export default function Step1({ resetRestaurant, next, disableDot }) {
+    const { meal, setMeal, people, setPeople } = useContext(MyContext);
     const onFinish = values => {
         console.log('Success:', values);
         next();
+    };
+
+    //get number of ppl
+
+    const onPeopleChange = value => {
+        setPeople(value);
     };
 
     const onFinishFailed = errorInfo => {
@@ -32,6 +39,11 @@ export default function Step1({ next, meal, people, onMealChange, onPeopleChange
     const onNumberChange = value => {
         setNumber({ ...validatePrimeNumber(value), value });
         onPeopleChange(value);
+    };
+
+    const onMealChange = value => {
+        setMeal(value);
+        resetRestaurant();
     };
     return (
         <div className='Step1'>

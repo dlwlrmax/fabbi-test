@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Select, Form, Button, Space } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { MyContext } from '../MyContext';
 const { Option } = Select;
 
-export default function Step2({ next, prev, restaurant, filterRestaurants, onSelectRestaurant }) {
+export default function Step2({ next, prev, filterRestaurants, onSelectRestaurant }) {
     const [restaurantsName, setRestaurants] = useState([]);
+    const { restaurant } = useContext(MyContext);
     useEffect(() => {
         const uniqueRestaurants = {};
         for (let item of filterRestaurants) {
