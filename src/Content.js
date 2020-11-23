@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Step1 from './Component/Step1';
 import Step2 from './Component/Step2';
 import Step3 from './Component/Step3';
@@ -6,6 +6,7 @@ import Review from './Component/Review';
 import uuid from 'react-uuid';
 import { Steps, message, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
+import { MyContext } from './MyContext';
 let content = '';
 const { Step } = Steps;
 
@@ -27,8 +28,10 @@ const steps = [
         content: 'Review',
     },
 ];
-export default function Content({ dishes }) {
+export default function Content() {
     const [current, setCurrent] = useState(0);
+    const context = useContext(MyContext);
+    const dishes = context.dishes;
     //get meal value
     const [meal, setMeal] = useState('');
     const onMealChange = value => {

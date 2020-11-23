@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import Content from './Content';
-
+import { MyContext } from './MyContext';
 function App() {
     const [dishes, setDishes] = useState([]);
 
@@ -20,7 +20,11 @@ function App() {
         getData();
     }, []);
 
-    return <div className='App'>{dishes.length ? <Content dishes={dishes} /> : <h1>Error</h1>}</div>;
+    return (
+        <MyContext.Provider value={{ dishes: dishes }}>
+            <div className='App'>{dishes.length ? <Content /> : <h1>loading</h1>}</div>;
+        </MyContext.Provider>
+    );
 }
 
 export default App;
